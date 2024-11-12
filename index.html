@@ -13,11 +13,12 @@
             margin: 0;
             padding: 0;
             background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
         }
         h1 {
             margin-top: 20px;
             font-size: 24px;
-            color: #333;
         }
         .calculator {
             width: 200px;
@@ -26,6 +27,7 @@
             border-radius: 8px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, border-color 0.3s;
         }
         .display {
             width: 100%;
@@ -46,6 +48,7 @@
             cursor: pointer;
             border: none;
             border-radius: 5px;
+            transition: background-color 0.3s;
         }
         .button:hover {
             background-color: #f0f0f0;
@@ -60,6 +63,42 @@
         .button-row {
             display: flex;
             justify-content: space-between;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .dark-mode .calculator {
+            background-color: #444;
+            border-color: #666;
+        }
+        .dark-mode .display {
+            background-color: #333;
+            color: #fff;
+            border-color: #555;
+        }
+        .dark-mode .button {
+            background-color: #555;
+            color: #fff;
+        }
+        .dark-mode .button.operation {
+            background-color: #ffaa00;
+        }
+        .dark-mode .button:hover {
+            background-color: #666;
+        }
+        .dark-mode-toggle {
+            margin-top: 10px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ccc;
+            transition: background-color 0.3s;
+        }
+        .dark-mode-toggle:hover {
+            background-color: #bbb;
         }
     </style>
 </head>
@@ -98,6 +137,7 @@
             <button class="button operation" onclick="calculate()">=</button>
         </div>
     </div>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
 
     <script>
         const display = document.getElementById("display");
@@ -120,6 +160,16 @@
             } catch (error) {
                 display.value = "Error";
             }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+        }
+
+        // Load dark mode preference from localStorage
+        if (localStorage.getItem("darkMode") === "true") {
+            document.body.classList.add("dark-mode");
         }
     </script>
 </body>
